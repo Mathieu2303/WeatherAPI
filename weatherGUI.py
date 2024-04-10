@@ -1,23 +1,27 @@
 import tkinter as tk 
+from main import get_weather_data
  #making gui for weather
  
-def print_question():
-    question = question_entry.get()
-    print("Question:", question)
+def get_city():
+    question = city_entry.get()
+    response = get_weather_data(question)
+    print(response)
+    return response
 
-
+    
+    
 master = tk.Tk()
 
 master.config(width =400,height = 300)
 master.title("Weather Application")
 
-question_label = tk.Label(master, text = "Enter your question: ")
+question_label = tk.Label(master, text = "what city would you like to know the tempature for? ")
 question_label.pack()
 
-question_entry = tk.Entry(master, width = 50)
-question_entry.pack()
+city_entry = tk.Entry(master)
+city_entry.pack()
 
-print_button = tk.Button(master, text = "submit", command = print_question)
+print_button = tk.Button(master, text = "submit", command = get_city)
 print_button.pack()
 
 
