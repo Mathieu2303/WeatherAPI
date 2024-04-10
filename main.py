@@ -6,8 +6,9 @@ def get_weather_data(city):
     url =  f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}'
     response = requests.get(url)
     data = response.json()
-    tempature = data['main']['temp']
-    return tempature
+    kel_tempature = data['main']['temp']
+    far_temp = (1.8(kel_tempature - 273.15)) + 32
+    return far_temp
 
 
     
