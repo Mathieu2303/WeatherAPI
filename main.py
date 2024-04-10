@@ -1,41 +1,20 @@
-import pygame 
+import requests #testing commit
+import json
 
-pygame.init()
-background_colour = (234, 212, 252) 
-screen = pygame.display.set_mode((300, 300)) 
-pygame.display.set_caption('Geeksforgeeks') 
-screen.fill(background_colour) 
-pygame.display.flip() 
-  
-x = 50
-y = 50
-width = 40
-height = 60
-vel = 5 
-  
-  
-running = True
-  
- 
-while running: 
-    pygame.time.delay(100)
-   
-    for event in pygame.event.get(): 
-      
-            
-        if event.type == pygame.QUIT: 
-            running = False
-            
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        x -= vel
-    if keys[pygame.K_RIGHT]:
-        x += vel
-    if keys[pygame.K_UP]:
-        y -= vel
-    if keys[pygame.K_DOWN]:
-        y += vel
+def get_weather_data(APIkey, city):
+    url =  f'http://api.openweathermap.org/data/2.5/weather?q={city}&appid={APIkey}'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()  
+    else:
+        print("failed")
+        return None
+        
 
-    screen.fill(background_colour)
-    pygame.draw.rect(screen, (255, 0, 0), (x,y,width,height))
-    pygame.display.update()
+def main():
+    api_key = '83c8f7fdb9f69377e333be8207a8539c'
+    city_input = input("what city would you like to know the tempature for?")
+    get_weather_data(api_key,city_input)
+    
+    
+    
